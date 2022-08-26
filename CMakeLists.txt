@@ -91,6 +91,8 @@ if (NOT CMAKE_BUILD_TYPE)
         RelWithDebInfo MinSizeRel Profile Coverage." FORCE)
 endif ()
 
+# Generate static or shared libraries
+option (BUILD_STATIC_LIBS "Generate static libraries" OFF)
 
 ###############################################################################
 # Install prefix settings

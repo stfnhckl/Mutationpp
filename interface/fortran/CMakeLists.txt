@@ -19,14 +19,15 @@
 # <http://www.gnu.org/licenses/>.
 #
 
-cmake_minimum_required(VERSION 2.6)
-cmake_policy(SET CMP0022 NEW)
+set(wrapper_source cwrapper.cpp cwrapper_interface.f90)
 
-add_library(mutation++_fortran
-    SHARED 
-        cwrapper.cpp 
-        cwrapper_interface.f90
-)
+if (BUILD_STATIC_LIBS)
+    add_library(mutation++_fortran STATIC ${wrapper_source})
+    target_link_libraries(mutation++_fortran PUBLIC mutation++)
+else()
+    add_library(mutation++_fortran SHARED ${wrapper_source})
+    target_link_libraries(mutation++_fortran PRIVATE mutation++)
+endif()
 add_library(mutation++::fortran_interface ALIAS mutation++_fortran)
 
 set_target_properties(mutation++_fortran 
@@ -35,10 +36,6 @@ set_target_properties(mutation++_fortran
         EXPORT_NAME fortran_interface
 )
 
-target_link_libraries(mutation++_fortran
-    PRIVATE
-        mutation++
-)
 install(TARGETS mutation++_fortran EXPORT mutation++Targets
     LIBRARY  DESTINATION ${INSTALL_LIB_DIR}
     ARCHIVE  DESTINATION ${INSTALL_LIB_DIR}
