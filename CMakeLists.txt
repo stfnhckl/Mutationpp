@@ -156,10 +156,10 @@ if (BUILD_FORTRAN_WRAPPER)
         set (CMAKE_Fortran_FLAGS "-fdefault-real-8" CACHE STRING
              "Flags used by the Fortran compiler during all builds."
              FORCE )
-        set (CMAKE_Fortran_FLAGS_RELEASE "-O3" CACHE STRING
+        set (CMAKE_Fortran_FLAGS_RELEASE "-Ofast" CACHE STRING
              "Flags used by the Fortran compiler during Release builds."
              FORCE )
-        set (CMAKE_Fortran_FLAGS_DEBUG "-g" CACHE STRING
+        set (CMAKE_Fortran_FLAGS_DEBUG "-Og -g" CACHE STRING
              "Flags used by the Fortran compiler during Debug builds."
              FORCE )
     elseif (Fortran_COMPILER_NAME STREQUAL "ifort")
@@ -170,7 +170,7 @@ if (BUILD_FORTRAN_WRAPPER)
         set (CMAKE_Fortran_FLAGS_RELEASE "-O3" CACHE STRING
              "Flags used by the Fortran compiler during Release builds."
              FORCE )
-        set (CMAKE_Fortran_FLAGS_DEBUG "-g -traceback -fpe0 -check all" CACHE STRING
+        set (CMAKE_Fortran_FLAGS_DEBUG "-O0 -g -traceback -fpe0 -check all" CACHE STRING
              "Flags used by the Fortran compiler during Debug builds."
              FORCE )
     endif()
