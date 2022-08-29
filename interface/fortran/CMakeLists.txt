@@ -23,7 +23,7 @@ set(wrapper_source cwrapper.cpp cwrapper_interface.f90)
 
 if (BUILD_STATIC_LIBS)
     add_library(mutation++_fortran STATIC ${wrapper_source})
-    target_link_libraries(mutation++_fortran PUBLIC mutation++)
+    target_link_libraries(mutation++_fortran PRIVATE mutation++)
 else()
     add_library(mutation++_fortran SHARED ${wrapper_source})
     target_link_libraries(mutation++_fortran PRIVATE mutation++)
